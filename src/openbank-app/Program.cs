@@ -16,10 +16,25 @@ builder.Services.AddAuthorization(options =>
     // By default, all incoming requests will be authorized according to the default policy.
     options.FallbackPolicy = options.DefaultPolicy;
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("HikingPolicy", policy =>
+        policy.RequireClaim("extension_Hobbies", "0"));
+
+    options.AddPolicy("ReadingPolicy", policy =>
+        policy.RequireClaim("extension_Hobbies", "1"));
+
+    options.AddPolicy("EnglishPolicy", policy =>
+        policy.RequireClaim("extension_Hobbies", "2"));
+});
+
 builder.Services.AddRazorPages()
     .AddMicrosoftIdentityUI();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -38,6 +53,11 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapControllers();
 
 app.Run();
