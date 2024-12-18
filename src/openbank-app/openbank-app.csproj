@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-openbank_app-a9fc5bdf-8046-4acc-a177-b17c47677bd0</UserSecretsId>
     <RootNamespace>openbank_app</RootNamespace>
